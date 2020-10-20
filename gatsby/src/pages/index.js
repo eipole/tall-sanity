@@ -1,12 +1,13 @@
 import React from "react"
-// import { graphql } from "gatsby"
-// import Img from "gatsby-image"
+import { graphql } from "gatsby"
+import Img from "gatsby-image"
 import styled from "styled-components"
 
-// const StyledImg = styled(Img)`
-//   width: 100%;
-//   height: auto;
-// `
+const StyledImg = styled(Img)`
+background: blue;
+  // width: 100%;
+  // height: auto;
+`
 
 const WrapperDiv = styled.div`
   display: flex;
@@ -18,13 +19,6 @@ const WrapperDiv = styled.div`
     width: 30%;
     border: 1px solid blue;
   }
-  /*  .gatsby-image-wrapper {
-    width: 40rem;
-    height: 50rem;
-  } */
-  /*   picture {
-    width: 50%;
-  } */
   .first-section {
     display: flex;
     justify-content: space-between;
@@ -33,7 +27,7 @@ const WrapperDiv = styled.div`
 `
 
 export default function Home({ data }) {
-  console.log(data)
+  const contentArr = data.osad.nodes
   return (
     <WrapperDiv>
       <section className="first-section">
@@ -41,8 +35,14 @@ export default function Home({ data }) {
           Hi and welcome
           <br /> <span>to gatsby testpage</span>
         </h1>
+        {contentArr.map(elem=>(
+          <div key={elem.id} >
+          <h4>{elem.name}</h4>
+          <StyledImg fluid={elem.image.asset.fluid} alt="" />
+        <p>{elem.description}</p>
+          </div>
+        ))}
         <h3>Siin on tallinna pilt</h3>
-        {/* <StyledImg fluid={data.file.childImageSharp.fluid} alt="" /> */}
       </section>
       <section>
         <h2>About</h2>
@@ -61,6 +61,26 @@ export default function Home({ data }) {
     </WrapperDiv>
   )
 }
+
+export const query = graphql`
+query MyQuery {
+  osad: allSanityPildid {
+    totalCount
+    nodes {
+      id
+      description
+      name
+      image {
+        asset {
+          fluid(maxWidth: 100) {
+            ...GatsbySanityImageFluid
+          }
+        }
+      }
+    }
+  }
+}`
+
 
 /* export const query = graphql`
   query {
