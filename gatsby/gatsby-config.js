@@ -4,6 +4,7 @@ require("dotenv").config({
 })
 module.exports = {
   plugins: [
+    `gatsby-plugin-styled-components`,
     {
       resolve: `gatsby-source-sanity`,
       options: {
@@ -13,6 +14,5 @@ module.exports = {
         token: process.env.SANITY_TOKEN
       }
     }, 
-    `gatsby-plugin-styled-components`,
   ],
 }

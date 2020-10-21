@@ -4,9 +4,9 @@ import Img from "gatsby-image"
 import styled from "styled-components"
 
 const StyledImg = styled(Img)`
-background: blue;
-  // width: 100%;
-  // height: auto;
+   width: 100%;
+   
+   height: 600px;
 `
 
 const WrapperDiv = styled.div`
@@ -14,13 +14,22 @@ const WrapperDiv = styled.div`
   flex-direction: column;
   margin: 0 auto;
   border: 5px solid yellow;
-  width: 80%;
   h1 {
     width: 30%;
     border: 1px solid blue;
+    height: 200px;
+    z-index: 4;
+    background: blue;
+    margin-bottom: -6em;
+    padding: 1em;
+  }
+  h4{
+    text-align: right;
   }
   .first-section {
     display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
     justify-content: space-between;
     border: 1px solid red;
   }
@@ -72,7 +81,7 @@ query MyQuery {
       name
       image {
         asset {
-          fluid(maxWidth: 100) {
+          fluid(maxWidth: 400) {
             ...GatsbySanityImageFluid
           }
         }
