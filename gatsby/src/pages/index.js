@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 
+
 const StyledImg = styled(Img)`
    width: 100%;
    
@@ -39,6 +40,7 @@ export default function Home({ data }) {
   const contentArr = data.osad.nodes
   return (
     <WrapperDiv>
+
       <section className="first-section">
         <h1>
           Hi and welcome
@@ -49,6 +51,7 @@ export default function Home({ data }) {
           <h4>{elem.name}</h4>
           <StyledImg fluid={elem.image.asset.fluid} alt="" />
         <p>{elem.description}</p>
+        <p>{elem.slug.current}</p>
           </div>
         ))}
         <h3>Siin on tallinna pilt</h3>
@@ -72,7 +75,7 @@ export default function Home({ data }) {
 }
 
 export const query = graphql`
-query MyQuery {
+query {
   osad: allSanityPildid {
     totalCount
     nodes {
@@ -85,6 +88,9 @@ query MyQuery {
             ...GatsbySanityImageFluid
           }
         }
+      }
+      slug {
+        current
       }
     }
   }
